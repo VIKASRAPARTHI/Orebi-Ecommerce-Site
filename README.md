@@ -2,6 +2,8 @@
 
 A modern, responsive e-commerce platform built with React.js, featuring a complete shopping experience with user authentication, product catalog, and cart functionality.
 
+![App Screenshot](public/screenshot.png)
+
 ## Features
 
 - **User Authentication**: Complete signup/signin flow with form validation
