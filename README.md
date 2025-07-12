@@ -4,41 +4,41 @@ A comprehensive, modern e-commerce platform built with React.js, Firebase, and R
 
 ![App Screenshot](https://github.com/VIKASRAPARTHI/Orebi-Ecommerce-Site/blob/main/public/Screenshot.png?raw=true)
 
-## 🚀 Features
+## Features
 
-### 🔐 **Authentication & Security**
+###  **Authentication & Security**
 - **Firebase Authentication**: Secure email/password authentication
 - **Protected Routes**: All main pages require authentication
 - **User Profiles**: Complete user profile management with personal information
 - **Session Persistence**: Automatic login state management across browser sessions
 
-### 🛒 **Shopping Experience**
+###  **Shopping Experience**
 - **Product Catalog**: Browse products by categories (New Arrivals, Best Sellers, Special Offers)
 - **Shopping Cart**: Add/remove items with Redux state management
 - **Product Details**: Detailed product pages with images and descriptions
 - **Responsive Design**: Mobile-first design with Tailwind CSS
 
-### 💳 **Payment & Orders**
+###  **Payment & Orders**
 - **Razorpay Integration**: Secure online payment processing
 - **Cash on Delivery**: COD option with order tracking
 - **Order Management**: Complete order history and tracking system
 - **Persistent Storage**: Orders stored permanently by user email
 - **Cross-Session Data**: Order history persists across logout/login cycles
 
-### 📊 **Order Tracking & Management**
+###  **Order Tracking & Management**
 - **Real-time Status**: 5-stage order tracking (Pending → Confirmed → Processing → Shipped → Delivered)
 - **Visual Timeline**: Interactive order status with progress indicators
 - **Order Details**: Complete order breakdown with items, pricing, and shipping information
 - **Payment Method Tracking**: Clear distinction between online payments and COD
 - **Delivery Estimates**: Automatic delivery date calculation
 
-### 🎨 **User Interface**
+###  **User Interface**
 - **Modern Design**: Clean, professional interface
 - **Responsive Layout**: Works seamlessly on all devices
 - **Smooth Animations**: Framer Motion animations and transitions
 - **Intuitive Navigation**: User-friendly navigation with authentication-aware menus
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### **Frontend**
 - **React.js** - Modern JavaScript library for building user interfaces
@@ -66,7 +66,7 @@ A comprehensive, modern e-commerce platform built with React.js, Firebase, and R
 - **ESLint** - Code linting and formatting
 - **Git** - Version control
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - **Node.js** (v14 or higher)
@@ -121,14 +121,14 @@ npm start
 
 7. **Open [http://localhost:3000](http://localhost:3000)** to view it in your browser
 
-## 📜 Available Scripts
+##  Available Scripts
 
 - `npm start` - Runs the app in development mode
 - `npm test` - Launches the test runner
 - `npm run build` - Builds the app for production
 - `npm run eject` - Ejects from Create React App (one-way operation)
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 src/
@@ -163,40 +163,40 @@ src/
 └── constants/          # App constants and configuration
 ```
 
-## 🎯 Key Features & User Flow
+##  Key Features & User Flow
 
-### 🔐 **Authentication Flow**
+###  **Authentication Flow**
 1. **Registration**: Users create accounts with email, password, and personal details
 2. **Login**: Secure authentication with Firebase
 3. **Protected Access**: All main pages require authentication
 4. **Profile Management**: Users can view and manage their profile information
 
-### 🛒 **Shopping Experience**
+###  **Shopping Experience**
 1. **Browse Products**: Explore categorized product catalog
 2. **Product Details**: View detailed product information and images
 3. **Add to Cart**: Add items with quantity selection
 4. **Cart Management**: Review, modify, and manage cart items
 5. **Secure Checkout**: Proceed to payment with authentication
 
-### 💳 **Payment & Order Processing**
+###  **Payment & Order Processing**
 1. **Payment Options**: Choose between online payment (Razorpay) or Cash on Delivery
 2. **Order Creation**: Orders automatically saved to database with complete details
 3. **Order Confirmation**: Immediate confirmation with order number
 4. **Email-based Storage**: Orders linked to user email for persistence
 
-### 📊 **Order Management**
+###  **Order Management**
 1. **Order History**: View all past orders in profile page
 2. **Order Tracking**: Real-time status updates with visual timeline
 3. **Order Details**: Complete breakdown of items, pricing, and shipping
 4. **Cross-Session Persistence**: Orders remain accessible after logout/login
 
-### 🎨 **User Experience**
+###  **User Experience**
 - **Responsive Design**: Seamless experience across all devices
 - **Intuitive Navigation**: Easy-to-use interface with clear call-to-actions
 - **Real-time Feedback**: Toast notifications for all user actions
 - **Loading States**: Smooth loading indicators for better UX
 
-## 🗄️ Database Structure
+##  Database Structure
 
 ### **Users Collection (Firebase Auth + Firestore)**
 ```javascript
@@ -248,7 +248,7 @@ src/
 }
 ```
 
-## 🚀 Deployment
+##  Deployment
 
 ### **Firebase Hosting**
 1. Install Firebase CLI: `npm install -g firebase-tools`
@@ -267,7 +267,7 @@ src/
 2. Run: `vercel`
 3. Follow the prompts to deploy
 
-## 🧪 Testing
+##  Testing
 
 ### **Manual Testing Checklist**
 - [ ] User registration and login
@@ -284,7 +284,7 @@ src/
 - Test both successful and failed payment scenarios
 - Verify order creation for both online and COD payments
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
@@ -292,17 +292,17 @@ src/
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
 
-## 👨‍💻 Author
+## Author
 
 **Vikas Raparthi**
 - GitHub: [@VIKASRAPARTHI](https://github.com/VIKASRAPARTHI)
 - LinkedIn: [Raparthi Vikas](https://linkedin.com/in/raparthi-vikas-442242294/)
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - React.js community for excellent documentation
 - Firebase for providing robust backend services
