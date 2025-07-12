@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "OREBI Shop",
+  "name": "OREBI Shopping - Premium E-commerce",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,11 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#262626",
+  "background_color": "#ffffff",
+  "serviceworker": {
+    "src": "/sw.js",
+    "scope": "/",
+    "update_via_cache": "none"
+  }
 }

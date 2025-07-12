@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logoLight } from "../../assets/images";
+import { useAuth } from "../../contexts/AuthContext";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const { signup } = useAuth();
+
   // ============= Initial State Start here =============
   const [clientName, setClientName] = useState("");
   const [email, setEmail] = useState("");
@@ -14,6 +19,7 @@ const SignUp = () => {
   const [country, setCountry] = useState("");
   const [zip, setZip] = useState("");
   const [checked, setChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
   // ============= Initial State End here ===============
   // ============= Error Msg Start here =================
   const [errClientName, setErrClientName] = useState("");
@@ -68,65 +74,110 @@ const SignUp = () => {
   };
   // ================= Email Validation End here ===============
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    if (checked) {
-      if (!clientName) {
-        setErrClientName("Enter your name");
+
+    // Reset all error messages
+    setErrClientName("");
+    setErrEmail("");
+    setErrPhone("");
+    setErrPassword("");
+    setErrAddress("");
+    setErrCity("");
+    setErrCountry("");
+    setErrZip("");
+
+    if (!checked) {
+      toast.error("Please agree to the terms and conditions");
+      return;
+    }
+
+    // Validation
+    let hasError = false;
+
+    if (!clientName) {
+      setErrClientName("Enter your name");
+      hasError = true;
+    }
+    if (!email) {
+      setErrEmail("Enter your email");
+      hasError = true;
+    } else {
+      if (!EmailValidation(email)) {
+        setErrEmail("Enter a Valid email");
+        hasError = true;
       }
-      if (!email) {
-        setErrEmail("Enter your email");
-      } else {
-        if (!EmailValidation(email)) {
-          setErrEmail("Enter a Valid email");
-        }
+    }
+    if (!phone) {
+      setErrPhone("Enter your phone number");
+      hasError = true;
+    }
+    if (!password) {
+      setErrPassword("Create a password");
+      hasError = true;
+    } else {
+      if (password.length < 6) {
+        setErrPassword("Passwords must be at least 6 characters");
+        hasError = true;
       }
-      if (!phone) {
-        setErrPhone("Enter your phone number");
-      }
-      if (!password) {
-        setErrPassword("Create a password");
-      } else {
-        if (password.length < 6) {
-          setErrPassword("Passwords must be at least 6 characters");
-        }
-      }
-      if (!address) {
-        setErrAddress("Enter your address");
-      }
-      if (!city) {
-        setErrCity("Enter your city name");
-      }
-      if (!country) {
-        setErrCountry("Enter the country you are residing");
-      }
-      if (!zip) {
-        setErrZip("Enter the zip code of your area");
-      }
-      // ============== Getting the value ==============
-      if (
-        clientName &&
-        email &&
-        EmailValidation(email) &&
-        password &&
-        password.length >= 6 &&
-        address &&
-        city &&
-        country &&
+    }
+    if (!address) {
+      setErrAddress("Enter your address");
+      hasError = true;
+    }
+    if (!city) {
+      setErrCity("Enter your city name");
+      hasError = true;
+    }
+    if (!country) {
+      setErrCountry("Enter the country you are residing");
+      hasError = true;
+    }
+    if (!zip) {
+      setErrZip("Enter the zip code of your area");
+      hasError = true;
+    }
+
+    if (hasError) return;
+
+    // If all validations pass, create account with Firebase
+    setLoading(true);
+    try {
+      const userData = {
+        clientName,
+        phone,
+        address,
+        city,
+        country,
         zip
-      ) {
-        setSuccessMsg(
-          `Hello dear ${clientName}, Welcome you to OREBI Admin panel. We received your Sign up request. We are processing to validate your access. Till then stay connected and additional assistance will be sent to you by your mail at ${email}`
-        );
-        setClientName("");
-        setEmail("");
-        setPhone("");
-        setPassword("");
-        setAddress("");
-        setCity("");
-        setCountry("");
-        setZip("");
-      }
+      };
+
+      await signup(email, password, userData);
+
+      setSuccessMsg(
+        `Hello dear ${clientName}, Welcome to OREBI! Your account has been created successfully. Redirecting to sign in...`
+      );
+
+      // Clear form
+      setClientName("");
+      setEmail("");
+      setPhone("");
+      setPassword("");
+      setAddress("");
+      setCity("");
+      setCountry("");
+      setZip("");
+      setChecked(false);
+
+      // Redirect to signin after 2 seconds
+      setTimeout(() => {
+        navigate("/signin");
+      }, 2000);
+
+    } catch (error) {
+      console.error("Signup error:", error);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -386,13 +437,14 @@ const SignUp = () => {
                 </div>
                 <button
                   onClick={handleSignUp}
+                  disabled={loading || !checked}
                   className={`${
-                    checked
+                    checked && !loading
                       ? "bg-primeColor hover:bg-black hover:text-white cursor-pointer"
-                      : "bg-gray-500 hover:bg-gray-500 hover:text-gray-200 cursor-none"
+                      : "bg-gray-500 hover:bg-gray-500 hover:text-gray-200 cursor-not-allowed"
                   } w-full text-gray-200 text-base font-medium h-10 rounded-md hover:text-white duration-300`}
                 >
-                  Create Account
+                  {loading ? "Creating Account..." : "Create Account"}
                 </button>
                 <p className="text-sm text-center font-titleFont font-medium">
                   Don't have an Account?{" "}

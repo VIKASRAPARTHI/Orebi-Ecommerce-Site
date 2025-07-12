@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { logoLight } from "../../assets/images";
+import { useAuth } from "../../contexts/AuthContext";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { signin } = useAuth();
+
+  // Get the intended destination from location state
+  const from = location.state?.from?.pathname || "/";
+
   // ============= Initial State Start here =============
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   // ============= Initial State End here ===============
   // ============= Error Msg Start here =================
   const [errEmail, setErrEmail] = useState("");
@@ -25,26 +34,48 @@ const SignIn = () => {
     setErrPassword("");
   };
   // ============= Event Handler End here ===============
-  const handleSignUp = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
+
+    // Reset error messages
+    setErrEmail("");
+    setErrPassword("");
+
+    // Validation
+    let hasError = false;
 
     if (!email) {
       setErrEmail("Enter your email");
+      hasError = true;
     }
 
     if (!password) {
-      setErrPassword("Create a password");
+      setErrPassword("Enter your password");
+      hasError = true;
     }
-    // ============== Getting the value ==============
-    if (email && password) {
+
+    if (hasError) return;
+
+    // Sign in with Firebase
+    setLoading(true);
+    try {
+      await signin(email, password);
       setSuccessMsg(
-        `Hello dear, Thank you for your attempt. We are processing to validate your access. Till then stay connected and additional assistance will be sent to you by your mail at ${email}`
+        `Welcome back! You have been signed in successfully.`
       );
       setEmail("");
       setPassword("");
+
+      // Redirect to intended page or home page after successful login
       setTimeout(() => {
-        navigate("/");
-      }, 2000);
+        navigate(from, { replace: true });
+      }, 1500);
+
+    } catch (error) {
+      console.error("Signin error:", error);
+      // Error is already handled in the AuthContext with toast
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -180,10 +211,15 @@ const SignIn = () => {
                 </div>
 
                 <button
-                  onClick={handleSignUp}
-                  className="bg-primeColor hover:bg-black text-gray-200 hover:text-white cursor-pointer w-full text-base font-medium h-10 rounded-md  duration-300"
+                  onClick={handleSignIn}
+                  disabled={loading}
+                  className={`${
+                    loading
+                      ? "bg-gray-500 cursor-not-allowed"
+                      : "bg-primeColor hover:bg-black cursor-pointer"
+                  } text-gray-200 hover:text-white w-full text-base font-medium h-10 rounded-md duration-300`}
                 >
-                  Sign In
+                  {loading ? "Signing In..." : "Sign In"}
                 </button>
                 <p className="text-sm text-center font-titleFont font-medium">
                   Don't have an Account?{" "}
