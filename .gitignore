@@ -9,7 +9,8 @@
 /coverage
 
 # production
-# /build
+/build
+/dist
 
 # misc
 .DS_Store
@@ -21,3 +22,64 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Build and deployment files
+*.tgz
+*.tar.gz
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# Firebase cache and config
+.firebase/
+firebase-debug.log
+firestore-debug.log
+
+# Vercel
+.vercel
+
+# Local Netlify folder
+.netlify
